@@ -31,7 +31,7 @@ if (contactForm) {
         };
 
         // Send email using EmailJS
-        emailjs.send('service_dlx9ymf', 'template_sb6oyxt', formData)
+        emailjs.send('service_dlx9ymf', 'template_0rj9wec', formData)
             .then(function() {
                 // Show success message
                 showMessage('Message sent successfully! I will get back to you soon.', 'success');
