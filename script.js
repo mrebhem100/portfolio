@@ -151,4 +151,100 @@ document.querySelectorAll('.timeline-item').forEach(item => {
     item.addEventListener('mouseleave', function() {
         this.style.transform = 'translateY(0)';
     });
+});
+
+// Scroll Progress Bar
+const scrollProgress = document.createElement('div');
+scrollProgress.className = 'scroll-progress';
+document.body.appendChild(scrollProgress);
+
+window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    scrollProgress.style.width = scrolled + '%';
+});
+
+// Navbar Hide/Show on Scroll
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+        navbar.classList.remove('hidden');
+        return;
+    }
+    
+    if (currentScroll > lastScroll && !navbar.classList.contains('hidden')) {
+        navbar.classList.add('hidden');
+    } else if (currentScroll < lastScroll && navbar.classList.contains('hidden')) {
+        navbar.classList.remove('hidden');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Intersection Observer for Section Animations
+const animatedSections = document.querySelectorAll('section');
+const timelineItems = document.querySelectorAll('.timeline-item');
+
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+animatedSections.forEach(section => {
+    observer.observe(section);
+});
+
+timelineItems.forEach(item => {
+    observer.observe(item);
+});
+
+// Add floating animation to specific elements
+const floatingElements = document.querySelectorAll('.hero-content, .project-card, .blog-card');
+floatingElements.forEach(element => {
+    element.classList.add('float');
+});
+
+// Enhanced Button Click Effect
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        const x = e.clientX - e.target.offsetLeft;
+        const y = e.clientY - e.target.offsetTop;
+        
+        const ripple = document.createElement('span');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+});
+
+// Smooth Loading Screen
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loading-screen');
+    if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    }
 }); 
