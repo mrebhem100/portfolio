@@ -1,82 +1,134 @@
-// Initialize EmailJS
-(function() {
-    emailjs.init("jpaanFboq2tkhTERA"); // Replace with your actual public key
-})();
+// Initialize AOS (Animate On Scroll)
+AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true
+});
 
-// Smooth scrolling for navigation links
+// Particles.js configuration
+const particlesConfig = {
+    particles: {
+        number: {
+            value: 50,
+            density: {
+                enable: true,
+                value_area: 800
+            }
+        },
+        color: {
+            value: '#ffffff'
+        },
+        shape: {
+            type: 'circle'
+        },
+        opacity: {
+            value: 0.3,
+            random: false
+        },
+        size: {
+            value: 2,
+            random: true
+        },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#ffffff',
+            opacity: 0.2,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 3,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: {
+                enable: true,
+                mode: 'repulse'
+            },
+            onclick: {
+                enable: true,
+                mode: 'push'
+            },
+            resize: true
+        }
+    },
+    retina_detect: true
+};
+
+// Initialize particles for each section
+const sections = ['home', 'about', 'skills', 'projects', 'experience', 'blog'];
+sections.forEach(section => {
+    const containerId = `particles-js-${section}`;
+    if (document.getElementById(containerId)) {
+        particlesJS(containerId, particlesConfig);
+    }
+});
+
+// Loading Screen
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.querySelector('.loading-screen');
+    if (loadingScreen) {
+        // Hide loading screen after a short delay
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }, 1000);
+    }
+});
+
+// Theme Toggle
+const themeToggle = document.querySelector('.theme-toggle');
+const body = document.body;
+
+themeToggle.addEventListener('click', () => {
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeToggle.querySelector('i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+    
+    // Save theme preference
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+});
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    body.setAttribute('data-theme', savedTheme);
+    themeToggle.querySelector('i').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+// Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     });
 });
 
-// Form submission handling
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Show loading state
-        const submitBtn = this.querySelector('.btn');
-        submitBtn.classList.add('loading');
-        
-        // Get form data
-        const formData = {
-            user_name: document.getElementById('name').value,
-            user_email: document.getElementById('email').value,
-            message: document.getElementById('message').value
-        };
-
-        // Validate form data
-        if (!formData.user_name || !formData.user_email || !formData.message) {
-            showMessage('Please fill in all fields', 'error');
-            submitBtn.classList.remove('loading');
-            return;
-        }
-
-        // Send email using EmailJS
-        emailjs.send('service_dlx9ymf', 'template_0rj9wec', formData)
-            .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
-                showMessage('Message sent successfully! I will get back to you soon.', 'success');
-                contactForm.reset();
-            })
-            .catch(function(error) {
-                console.error('FAILED...', error);
-                showMessage('Failed to send message. Please try again later.', 'error');
-            })
-            .finally(function() {
-                submitBtn.classList.remove('loading');
-            });
-    });
-}
-
-// Function to show form messages
-function showMessage(message, type) {
-    // Remove any existing message
-    const existingMessage = document.querySelector('.form-message');
-    if (existingMessage) {
-        existingMessage.remove();
+// Scroll to Top Button Visibility
+const scrollTopBtn = document.querySelector('.scroll-top');
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        scrollTopBtn.style.opacity = '1';
+    } else {
+        scrollTopBtn.style.opacity = '0';
     }
-
-    // Create new message element
-    const messageElement = document.createElement('div');
-    messageElement.className = `form-message ${type} show`;
-    messageElement.textContent = message;
-
-    // Add message to form
-    const form = document.getElementById('contact-form');
-    form.appendChild(messageElement);
-
-    // Remove message after 5 seconds
-    setTimeout(() => {
-        messageElement.classList.remove('show');
-        setTimeout(() => messageElement.remove(), 300);
-    }, 5000);
-}
+});
 
 // Navbar background change on scroll
 window.addEventListener('scroll', function() {

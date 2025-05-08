@@ -7,21 +7,34 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <div id="particles-js"></div>
+
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo">EP</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <section id="home" class="hero">
+        <div id="particles-js-home" class="particles-container"></div>
         <div class="hero-content">
             <h1>Edmer Pugoy</h1>
             <h2>IT Professional</h2>
@@ -34,6 +47,7 @@
     </section>
 
     <section id="about" class="about">
+        <div id="particles-js-about" class="particles-container"></div>
         <div class="container">
             <h2>About Me</h2>
             <div class="about-content">
@@ -45,7 +59,93 @@
         </div>
     </section>
 
+    <section id="skills" class="skills">
+        <div id="particles-js-skills" class="particles-container"></div>
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-code"></i>
+                            <span>C#</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>.NET Framework</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>IT Support</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Network Administration</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>System Security</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-tools"></i>
+                            <span>Technical Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div id="particles-js-projects" class="particles-container"></div>
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Smart Classroom Monitoring System</h3>
+                        <p class="project-description">Developed an automated classroom monitoring system with Arduino integration for ACLC, featuring energy-saving technology and real-time monitoring capabilities.</p>
+                        <div class="project-tags">
+                            <span>Arduino</span>
+                            <span>IoT</span>
+                            <span>Energy Saving</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Network Security Implementation</h3>
+                        <p class="project-description">Implemented and maintained network security protocols for Dole Philippines, ensuring data protection and system integrity.</p>
+                        <div class="project-tags">
+                            <span>Network Security</span>
+                            <span>System Administration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="experience" class="experience">
+        <div id="particles-js-experience" class="particles-container"></div>
         <div class="container">
             <h2>Experience & Education</h2>
             <div class="timeline">
@@ -81,28 +181,29 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="blog" class="blog">
+        <div id="particles-js-blog" class="particles-container"></div>
         <div class="container">
-            <h2>Get In Touch</h2>
-            <div class="contact-content">
-                <form id="contact-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="user_name" placeholder="Your Name" required>
+            <h2>Latest Articles</h2>
+            <div class="blog-grid">
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-content">
+                        <span class="blog-date">March 15, 2024</span>
+                        <h3>Modern Web Development Trends</h3>
+                        <p>Exploring the latest trends in web development and their impact on the industry.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="user_email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">
-                        <span class="btn-text">Send Message</span>
-                        <span class="btn-loader"></span>
-                    </button>
-                </form>
+                </article>
+                <!-- Add more blog cards as needed -->
             </div>
         </div>
     </section>
+
+    <div class="floating-action-btn">
+        <a href="#home" class="scroll-top">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
 
     <footer>
         <div class="container">
@@ -110,7 +211,8 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 
