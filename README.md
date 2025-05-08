@@ -2,8 +2,6 @@
 
 A modern, responsive portfolio website showcasing my journey as an IT Professional and Programmer of the Year. Built with pure HTML, CSS, and JavaScript, featuring smooth animations and a clean design.
 
-![Portfolio Preview](https://imgur.com/a/ckwAS1z)
-
 ## 🚀 Features
 
 - **Modern Design**: Clean and professional interface with glassmorphism effects
